@@ -1,14 +1,18 @@
 import React from 'react';
 import Switch from './Components/Switch'
 import styled from 'styled-components';
+import { config } from 'react-spring'
 
 const App = () => {
-  const Switches = ['stiff', 'default', 'gentle', 'wobbly', 'slow', 'molasses'].map(item => (
-    <SwitchLabelContainer>
-      <p>{`${item} spring settings`}</p>
-      <Switch animationPreset={item} />
-    </SwitchLabelContainer>
-  ))
+  const Switches = Object.entries(config).map(item => {
+    const [name, configObject] = item;
+    return (
+      <SwitchLabelContainer key={name}>
+        <p>{`${name} spring settings`}</p>
+        <Switch animationPreset={configObject} />
+      </SwitchLabelContainer>
+    )
+  });
 
   return (
     <Container>
